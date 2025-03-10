@@ -1,4 +1,4 @@
-class StudentsController < ApplicationController
+class PupilsController < ApplicationController
   def index
     @students = Student.all.order({ :created_at => :desc })
 

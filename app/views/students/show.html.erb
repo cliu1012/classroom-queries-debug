@@ -8,14 +8,16 @@
   </a>
 </div>
 
+<!-- delete student -->
 <div>
-  <a href="/delete_student/<%= student.id %>">
+  <a href="/delete_student/<%= @student.id %>">
     Delete student
   </a>
 </div>
 
 <hr>
 
+<!-- update student info -->
 <form action="/modify_student/<%= @student.id %>" method="post">
   <div>
     <label for="email_box">
@@ -48,6 +50,7 @@
 
 <hr>
 
+<!-- student info -->
 <dl>
   <dt>
     First name
@@ -75,6 +78,7 @@
 
 <h3>Course Load</h3>
 
+<!-- enroll student in course -->
 <form action="/insert_enrollment" method="post">
 
   <input type="hidden" id="student_id_box" name="query_student_id" value="<%= @student.id %>">
@@ -100,10 +104,11 @@
 
 <hr>
 
+<!-- student's enrolled courses -->
 <ul>
-  <% enrollments = Enrollment.where({:student_id => student.id }) %>
+  <% enrollments = Enrollment.where({ :student_id => @student.id }) %>
   <% enrollments.each do |enrollment| %>
-    <% course = course.where({ :id => enrollment.course_id }).at(0) %>
+    <% course = Course.where({ :id => enrollment.course_id }).at(0) %>
     <li>
       <a href="/courses/<%= course.id %>">
         <%= course.title %>

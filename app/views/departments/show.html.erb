@@ -8,6 +8,7 @@
   </a>
 </div>
 
+<!-- delete department -->
 <div>
   <a href="/delete_department/<%= @department.id %>">
     Delete department
@@ -16,6 +17,7 @@
 
 <hr>
 
+<!-- update department -->
 <form action="/modify_department/<%= @department.id %>" method="post">
   <div>
     <label for="name_box">
@@ -32,6 +34,7 @@
 
 <hr>
 
+<!-- department information -->
 <dl>
   <dt>
     Name
@@ -51,10 +54,10 @@
 
 <hr>
 
+<!-- list of courses -->
 <h2>Courses</h2>
-<% courses = Course.where({ :department_id => @department.name }) %>
 <ul>
-  <% courses.each do |course| %>
+  <% @courses.each do |course| %>
     <li>
       <a href="/courses/<%= course.id %>"><%= course.title %></a>
     </li>

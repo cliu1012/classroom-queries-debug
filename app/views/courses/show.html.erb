@@ -1,5 +1,5 @@
 <h1>
-  Course #<%= course.id %> details
+  Course #<%= @course.id %> details
 </h1>
 
 <div>
@@ -8,6 +8,7 @@
   </a>
 </div>
 
+<!-- delete course -->
 <div>
   <a href="/delete_course/<%= @course.id %>">
     Delete course
@@ -16,28 +17,20 @@
 
 <hr>
 
+<!-- update course -->
 <form action="/modify_course/<%= @course.id %>" method="post">
   <div>
-    <label for="title_box">
-      Title
-    </label>
-
-    <input type="text" id="title_box" name="query_title">
+    <label for="title_box">Title</label>
+    <input type="text" id="title_box" name="query_title" value="<%=@course.title%>">
   </div>
 
   <div>
-    <label for="term_offered_box">
-      Term offered
-    </label>
-
+    <label for="term_offered_box">Term offered</label>
     <input type="text" id="term_offered_box" name="query_term_offered" value="<%= @course.term_offered %>">
   </div>
 
   <div>
-    <label for="department_id_box">
-      Department
-    </label>
-
+    <label for="department_id_box">Department</label>
     <select id="department_id_box" name="query_department_id">
       <% Department.order({ :name => :asc }).each do |a_department| %>
         <% if a_department.id == @course.department_id %>
@@ -60,12 +53,13 @@
 
 <hr>
 
+<!-- course information -->
 <dl>
   <dt>
     Title
   </dt>
   <dd>
-    <%= course.title %>
+    <%= @course.title %>
   </dd>
 
   <dt>
@@ -87,12 +81,13 @@
     Number of enrolled students
   </dt>
   <dd>
-    <%= enrollment.where({ :course_id => @course.id }) %>
+    <%= Enrollment.where({ :course_id => @course.id }).count %>
   </dd>
 </dl>
 
 <hr>
 
+<!-- course roster -->
 <h2>Roster</h2>
 <ul>
   <% Enrollment.where({ :course_id => @course.id }).each do |enrollment| %>
